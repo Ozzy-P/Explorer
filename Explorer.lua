@@ -1996,7 +1996,7 @@ function rightClickMenu(sObj)
 			for _, Selected in ipairs(Selection:Get()) do
 				pcall(function(...)
 					local varArgs = {...}
-					for _, rInstance in next, game:GetService("Workspace"):GetDescendants() do
+					for _, rInstance in next, game:GetDescendants() do
 						if rInstance.Name == "DestroySegway" then
 							for _, Arg in next, varArgs do
 								rInstance:FireServer(Arg, {Value = Arg})
