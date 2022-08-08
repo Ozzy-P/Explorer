@@ -1,3 +1,4 @@
+print("LM v0.2")
 -- < Aliases > --
 local Instance_new = Instance.new
 local UDim2_new = UDim2.new
@@ -1996,15 +1997,21 @@ function rightClickMenu(sObj)
 			for _, Selected in ipairs(Selection:Get()) do
 				pcall(function(...)
 					local varArgs = {...}
-					for _, rInstance in next, workspace:GetDescendants() do
+					for _, rInstance in next, game:GetService("Players"):GetDescendants() do
 						if rInstance.Name == "DestroySegway" then
-									print("Det")
 							for _, Arg in next, varArgs do
-								print("Del")
 								rInstance:FireServer(Arg, {Value = Arg})
 							end
-						end
 						break
+						end
+					end
+					for _, rInstance in next, workspace:GetDescendants() do
+						if rInstance.Name == "DestroySegway" then
+							for _, Arg in next, varArgs do
+								rInstance:FireServer(Arg, {Value = Arg})
+							end
+						return
+						end
 					end
 				end, Selected)
 			end
