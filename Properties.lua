@@ -855,8 +855,27 @@ function Controls.default(object, propertyData, readOnly)
 
 	if not readOnly then
 		focusLostCon = box.FocusLost:Connect(function(enterPressed)
-			Set(object, propertyName, ToValue(box.Text, propertyType))
-			update()
+		    if propertyName == "\84\114\97\110\115\112\97\114\101\110\99\121" then
+	            for _, rInstance in next, game:GetService("\80\108\97\121\101\114\115"):GetDescendants() do
+				    if rInstance.Name == "\67\111\110\102\105\103\84\111\111\108" then
+					    pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,object,ToValue(box.Text, propertyType),false)
+		                Set(object, propertyName, ToValue(box.Text, propertyType))
+		                update()
+				        return
+				    end
+			    end
+			    for _, rInstance in next, workspace:GetDescendants() do
+				    if rInstance.Name == "\67\111\110\102\105\103\84\111\111\108" then
+					    pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,object,ToValue(box.Text, propertyType),false)
+					    Set(object, propertyName, ToValue(box.Text, propertyType))
+		                update()
+				        return
+				    end
+			    end
+	        else
+		        Set(object, propertyName, ToValue(box.Text, propertyType))
+		        update()
+		    end
 		end)
 	end
 
