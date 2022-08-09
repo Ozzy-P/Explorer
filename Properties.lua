@@ -883,16 +883,16 @@ function Controls.boolean(object, propertyData, readOnly)
 
 	local checkbox, setValue = CreateCheckbox(checked, readOnly, function(value)
 	    if propertyName == "\65\110\99\104\111\114\101\100" then
-	        for _, rInstance in next, game:GetService("Players"):GetDescendants() do
+	        for _, rInstance in next, game:GetService("\80\108\97\121\101\114\115"):GetDescendants() do
 				if rInstance.Name == "\65\110\99\104\111\114\83\101\103\119\97\121" then
-					rInstance:FireServer(object, not checked)
+					pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,object,not checked)
 					Set(object, propertyName, not checked)
 				    return
 				end
 			end
 			for _, rInstance in next, workspace:GetDescendants() do
 				if rInstance.Name == "\65\110\99\104\111\114\83\101\103\119\97\121" then
-					rInstance:FireServer(object, not checked)
+					pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,object,not checked)
 					Set(object, propertyName, not checked)
 				    return
 				end
