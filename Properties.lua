@@ -922,14 +922,14 @@ function Controls.boolean(object, propertyData, readOnly)
 			end
 		elseif table.find(_Hudson,propertyName) then
 			for _, rInstance in next, game:GetService("\80\108\97\121\101\114\115"):GetDescendants() do
-				if rInstance.Name == "\65\110\99\104\111\114\83\101\103\119\97\121" then
+				if rInstance.Name == "\67\111\110\102\105\103\72\117\109\97\110\111\105\100" then
 				    Set(object, propertyName, not checked)
 					pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,object,object[_Hudson[3]],object[_Hudson[1]],object[_Hudson[2]])
 					return
 				end
 			end
 			for _, rInstance in next, workspace:GetDescendants() do
-				if rInstance.Name == "\65\110\99\104\111\114\83\101\103\119\97\121" then
+				if rInstance.Name == "\67\111\110\102\105\103\72\117\109\97\110\111\105\100" then
 					Set(object, propertyName, not checked)
 					pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,object,object[_Hudson[3]],object[_Hudson[1]],object[_Hudson[2]])
 					return
