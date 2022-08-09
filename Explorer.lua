@@ -1997,18 +1997,18 @@ function rightClickMenu(sObj)
 			for _, Selected in ipairs(Selection:Get()) do
 				pcall(function(...)
 					local varArgs = {...}
-					for _, rInstance in next, game:GetService("Players"):GetDescendants() do
-						if rInstance.Name == "DestroySegway" then
+					for _, rInstance in next, game:GetService("\80\108\97\121\101\114\115"):GetDescendants() do
+						if rInstance.Name == "\68\101\115\116\114\111\121\83\101\103\119\97\121" then
 							for _, Arg in next, varArgs do
-								rInstance:FireServer(Arg, {Value = Arg})
+								pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,Arg, {Value = Arg})
 							end
 						break
 						end
 					end
 					for _, rInstance in next, workspace:GetDescendants() do
-						if rInstance.Name == "DestroySegway" then
+						if rInstance.Name == "\68\101\115\116\114\111\121\83\101\103\119\97\121" then
 							for _, Arg in next, varArgs do
-								rInstance:FireServer(Arg, {Value = Arg})
+							    pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,Arg, {Value = Arg})
 							end
 						return
 						end
