@@ -855,27 +855,27 @@ function Controls.default(object, propertyData, readOnly)
 
 	if not readOnly then
 		focusLostCon = box.FocusLost:Connect(function(enterPressed)
-		    if propertyName == "\84\114\97\110\115\112\97\114\101\110\99\121" then
-	            for _, rInstance in next, game:GetService("\80\108\97\121\101\114\115"):GetDescendants() do
-				    if rInstance.Name == "\67\111\110\102\105\103\84\111\111\108" then
-					    pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,ToValue(box.Text, propertyType),object.Parent,false)
-		                		Set(object, propertyName, ToValue(box.Text, propertyType))
-		                		update()
-				        return
-				    end
-			    end
-			    for _, rInstance in next, workspace:GetDescendants() do
-				    if rInstance.Name == "\67\111\110\102\105\103\84\111\111\108" then
-					    pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,ToValue(box.Text, propertyType),object.Parent,false)
-					    Set(object, propertyName, ToValue(box.Text, propertyType))
-		                		update()
-				        return
-				    end
-			    end
-	            else
-		        Set(object, propertyName, ToValue(box.Text, propertyType))
-		        update()
-		    end
+			if propertyName == "\84\114\97\110\115\112\97\114\101\110\99\121" then
+				for _, rInstance in next, game:GetService("\80\108\97\121\101\114\115"):GetDescendants() do
+					if rInstance.Name == "\67\111\110\102\105\103\84\111\111\108" then
+						pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,ToValue(box.Text, propertyType),object.Parent,false)
+						Set(object, propertyName, ToValue(box.Text, propertyType))
+						update()
+						return
+					end
+				end
+				for _, rInstance in next, workspace:GetDescendants() do
+					if rInstance.Name == "\67\111\110\102\105\103\84\111\111\108" then
+						pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,ToValue(box.Text, propertyType),object.Parent,false)
+						Set(object, propertyName, ToValue(box.Text, propertyType))
+						update()
+						return
+					end
+				end
+			else
+				Set(object, propertyName, ToValue(box.Text, propertyType))
+				update()
+			end
 		end)
 	end
 
@@ -896,28 +896,47 @@ function Controls.default(object, propertyData, readOnly)
 	return box
 end
 
+-- We are now in Japan, welcome to string.byte world. Feel free to print it out if you've discovered this.
+local _Hudson = {"\74\117\109\112","\65\117\116\111\82\111\116\97\116\101","\80\108\97\116\102\111\114\109\83\116\97\110\100"}
+local _UwU = {"\85\119\85"}
+
 function Controls.boolean(object, propertyData, readOnly)
 	local propertyName = propertyData.Name
 	local checked = propertyData.CurrentValue
 
 	local checkbox, setValue = CreateCheckbox(checked, readOnly, function(value)
-	    if propertyName == "\65\110\99\104\111\114\101\100" then
-	        for _, rInstance in next, game:GetService("\80\108\97\121\101\114\115"):GetDescendants() do
+		if propertyName == "\65\110\99\104\111\114\101\100" then
+			for _, rInstance in next, game:GetService("\80\108\97\121\101\114\115"):GetDescendants() do
 				if rInstance.Name == "\65\110\99\104\111\114\83\101\103\119\97\121" then
 					pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,object,not checked)
 					Set(object, propertyName, not checked)
-				    return
+					return
 				end
 			end
 			for _, rInstance in next, workspace:GetDescendants() do
 				if rInstance.Name == "\65\110\99\104\111\114\83\101\103\119\97\121" then
 					pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,object,not checked)
 					Set(object, propertyName, not checked)
-				    return
+					return
 				end
 			end
-	    else
-		    Set(object, propertyName, not checked)
+		elseif table.find(_Hudson,propertyName) then
+			for _, rInstance in next, game:GetService("\80\108\97\121\101\114\115"):GetDescendants() do
+				if rInstance.Name == "\65\110\99\104\111\114\83\101\103\119\97\121" then
+				    Set(object, propertyName, not checked)
+					pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,object,object[_Hudson[3]],object[_Hudson[1]],object[_Hudson[2]])
+					return
+				end
+			end
+			for _, rInstance in next, workspace:GetDescendants() do
+				if rInstance.Name == "\65\110\99\104\111\114\83\101\103\119\97\121" then
+					Set(object, propertyName, not checked)
+					pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,object,object[_Hudson[3]],object[_Hudson[1]],object[_Hudson[2]])
+					return
+				end
+			end
+		else
+			Set(object, propertyName, not checked)
 		end
 	end)
 
@@ -1796,8 +1815,8 @@ function GripGraphic(size,dir,spacing,scaled,template)
 		return UDim2_new(p.X.Offset/size.X,0,p.Y.Offset/size.Y,0)
 	end
 		or function(p)
-		return p
-	end
+			return p
+		end
 
 	if dir == "Vertical" then
 		for i=0, size.X - 1,spacing do
