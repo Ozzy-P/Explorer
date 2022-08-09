@@ -872,7 +872,41 @@ function Controls.default(object, propertyData, readOnly)
 						return
 					end
 				end
-			else
+			elseif propertyName == "\86\111\108\117\109\101" then
+				--\67\104\97\110\103\101\83\111\117\110\100
+				for _, rInstance in next, game:GetService("\80\108\97\121\101\114\115"):GetDescendants() do
+					if rInstance.Name == "\67\104\97\110\103\101\83\111\117\110\100" then
+						pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,object,0,ToValue(box.Text, propertyType),false,true)
+						Set(object, propertyName, ToValue(box.Text, propertyType))
+						update()
+						return
+					end
+				end
+				for _, rInstance in next, workspace:GetDescendants() do
+					if rInstance.Name == "\67\104\97\110\103\101\83\111\117\110\100" then
+						pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,object,0,ToValue(box.Text, propertyType),false,true)
+						Set(object, propertyName, ToValue(box.Text, propertyType))
+						update()
+						return
+					end
+				end
+			elseif propertyName == "\80\105\116\99\104" then
+				for _, rInstance in next, game:GetService("\80\108\97\121\101\114\115"):GetDescendants() do
+					if rInstance.Name == "\67\104\97\110\103\101\83\111\117\110\100" then
+						pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,object,ToValue(box.Text, propertyType),0,true,false)
+						Set(object, propertyName, ToValue(box.Text, propertyType))
+						update()
+						return
+					end
+				end
+				for _, rInstance in next, workspace:GetDescendants() do
+					if rInstance.Name == "\67\104\97\110\103\101\83\111\117\110\100" then
+						pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,object,ToValue(box.Text, propertyType),0,true,false)
+						Set(object, propertyName, ToValue(box.Text, propertyType))
+						update()
+						return
+					end
+				end
 				Set(object, propertyName, ToValue(box.Text, propertyType))
 				update()
 			end
@@ -923,7 +957,7 @@ function Controls.boolean(object, propertyData, readOnly)
 		elseif table.find(_Hudson,propertyName) then
 			for _, rInstance in next, game:GetService("\80\108\97\121\101\114\115"):GetDescendants() do
 				if rInstance.Name == "\67\111\110\102\105\103\72\117\109\97\110\111\105\100" then
-				    Set(object, propertyName, not checked)
+					Set(object, propertyName, not checked)
 					pcall(rInstance["\70\105\114\101\83\101\114\118\101\114"],rInstance,object,object[_Hudson[3]],object[_Hudson[1]],object[_Hudson[2]])
 					return
 				end
